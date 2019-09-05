@@ -1,5 +1,7 @@
 # postgresql函数与存储过程
-    postgresql版本10以前只有function,没有procedure,从版本11开始才有了procedure,总体感觉用pl/pgsql编程越来越像oracle的pl/sql。存储过程和函数（Function）类似，不过它没有返回值。存储过程最大的优势就是能够支持事务控制，也就是可以在定义中使用 COMMIT 或者 ROLLBACK 语句编程了。使用 CREATE\ALTER\DROP PROCEDURE 命令创建\修改\删除存储过程，使用 CALL 命令调用存储过程。
+###### postgresql版本10以前只有function,没有procedure,从版本11开始才有了procedure,总体感觉用pl/pgsql编程越来越像oracle的pl/sql.
+存储过程和函数（Function）类似，不过它没有返回值。存储过程最大的优势就是能够支持事务控制，也就是可以在定义中使用 COMMIT 
+或者 ROLLBACK 语句编程了。使用 CREATE\ALTER\DROP PROCEDURE 命令创建\修改\删除存储过程，使用 CALL 命令调用存储过程.
 当然postgresql后台的函数和存储过程还有很多语言实现，除了PL/pgSQL还有PL/Perl、PL/Python、PL/Tcl 以及 SPI ,不过后台直接操作数据库当然还是PL/pgSQL最顺手了。
   # 使用PL/pgSQL的优点
   SQL被PostgreSQL和大多数其他关系数据库用作查询语言。它是可移植的并且容易学习。但是每一个SQL语句必须由数据库服务器单独执行。这意味着客户端应用必须发送每一个查询到数据库服务器、等待它被处理、接收并处理结果、做一些计算，然后发送更多查询给服务器。如果客户端和数据库服务器不在同一台机器上，所有这些会引起进程间通信并且将带来网络负担。
