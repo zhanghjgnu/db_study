@@ -1,0 +1,29 @@
+oracle11g RAC,两个节点，因为网络故障两个节点失效，重启后1#正常，2#一直没能启动成功，下面是处理过程:
+root登录 2#
+reboot后继续用root登录
+# cd  /u01/app/11.2.0.3/grid/bin
+# ./crs_stat -t -v
+提示
+crs-0184:Cannot communicate with CRS daemon
+首先检查asm是否正常
+# /etc/init.d/oracleasm scandisks   -----  重新扫描asm磁盘
+提示正常
+# /etc/init.d/oracleasm listdisks  ----显示asm磁盘是存在的。
+DISK1
+DISK2
+DISK3
+DISK4
+
+# ./crsclt start crs
+提示
+crs-4124:oracle high availability services startup failed
+crs-4000:Command start failed,or completed witg errors
+这个提示很熟悉，这是oracle的一个bug,解决办法是另开一个putty窗口，root登录，执行
+# /bin/ddif=/var/tmp/.oracle/npohasd of=/dev/null bs=1024 count=1
+然后这边的窗口再次执行
+#./crsclt start crs
+之后等待一两分钟，再次
+# ./crs_stat -t -v
+启动成功
+
+
