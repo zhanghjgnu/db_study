@@ -1,7 +1,7 @@
 ## postgresql函数返回数据集的总结
 
-    postgresql自定义函数可以返回refcursor/record,也可以返回自定义type，直接返回table。其中返回的refcursor/record最好在pg内部调用，其他语言比如golang调用后不方便处理。
-    返回自定义type和返回table差不多，下面是一个返回table的例子
+postgresql自定义函数可以返回refcursor/record,也可以返回自定义type，直接返回table。其中返回的refcursor/record最好在pg内部调用，其他语言比如golang调用后不方便处理。
+返回自定义type和返回table差不多，下面是一个返回table的例子
 ```    
 CREATE OR REPLACE FUNCTION clover_odr.sch_reg4cash_list(thsp_code text)
     RETURNS TABLE(pid1 text, patient_name1 text, patient_type1 text, reg_type1 text,pay_should1 numeric(12,4))
@@ -36,7 +36,7 @@ BEGIN
 END;
 $cloveropen$;
 ```
-    这样返回结果是括号括起来用逗号分隔的字段记录,其他语言比较容易处理，不过还是不够方便，还有更好的解决办法吗，答案是有的。
+这样返回结果是括号括起来用逗号分隔的字段记录,其他语言比较容易处理，不过还是不够方便，还有更好的解决办法吗，答案是有的。
 这就是返回json array结果集再转换为字符串,golang对json的处理很方便,下面是改进的代码:
 ```
 CREATE OR REPLACE FUNCTION clover_odr.sch_reg4cash_list_new(thsp_code text)
