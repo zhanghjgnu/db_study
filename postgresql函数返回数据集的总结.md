@@ -1,4 +1,5 @@
-postgresql函数返回数据集的总结
+## postgresql函数返回数据集的总结
+
     postgresql自定义函数可以返回refcursor/record,也可以返回自定义type，直接返回table。其中返回的refcursor/record最好在pg内部调用，其他语言比如golang调用后不方便处理。
     返回自定义type和返回table差不多，下面是一个返回table的例子
 ```    
