@@ -109,3 +109,8 @@ where option can be one of:
     FORCE_NOT_NULL ( column_name [, ...] )
     ENCODING 'encoding_name'
 ```
+### 今天导入一个疾病编码词典，一直提示invalid byte sequence for encoding "UTF8": 0xb9
+忽然想到有ENCODING选项，采用如下命令导入成功(不能换行):
+```
+copy clover_mir.diag_benxi_ln(icd_id, icd_name, begtime, endtime, pinyin_code, wubi_code, valid_flag, injury_flag, birth_flag, diag_cate, diag_type, diag_spec, opcode, optime, remark, diag_type_degree) from '/var/lib/postgresql/data/icd10_bx_ln.txt' ENCODING 'GBK';
+```
